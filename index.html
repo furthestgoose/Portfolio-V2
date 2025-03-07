@@ -335,7 +335,6 @@
             <div class="window-content resume-content">
             <h2>Resume</h2>
             <div id="resume-content">
-                <!-- Resume content will be loaded here -->
             </div>
             <button onclick="downloadResume()">Download Resume</button>
             </div>
@@ -396,18 +395,15 @@
             <div class="resize-handle resize-handle-sw"></div>
         </div>
         
-        <!-- Taskbar -->
         <div id="taskbar">
             <div id="start-button" onclick="toggleStartMenu()">
                 <img src="https://img.icons8.com/skeuomorphism/32/circled-play.png" alt="Start"> Start
             </div>
             <div id="open-windows">
-                <!-- Populated dynamically -->
             </div>
             <div id="time">3:45 PM</div>
         </div>
         
-        <!-- Start Menu -->
         <div id="start-menu">
             <div class="start-item" onclick="openWindow('about'); toggleStartMenu();">
                 <img src="https://img.icons8.com/skeuomorphism/32/info.png" alt="About"> About Me
@@ -426,7 +422,9 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pizzip/3.1.4/pizzip.min.js"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/pizzip@3.1.8/dist/pizzip.min.js
+"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.21.0/docxtemplater.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
@@ -640,7 +638,6 @@ function updateTaskbar() {
     });
 }
 
-// Start menu
 function toggleStartMenu() {
     const startMenu = document.getElementById('start-menu');
     if (startMenu.style.display === 'block') {
@@ -1021,7 +1018,6 @@ function setupTouchControls() {
         const deltaX = touch.clientX - touchStartX;
         const deltaY = touch.clientY - touchStartY;
         
-        // Move the window
         window.style.left = (windowStartX + deltaX) + 'px';
         window.style.top = (windowStartY + deltaY) + 'px';
         
