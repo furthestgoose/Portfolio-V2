@@ -192,6 +192,10 @@ a {
     border-radius: 5px;
   }
 
+  .icon-image img:hover{
+    cursor: url('assets/cursor styles/Pointer.png'), pointer !important;
+  }
+
 .icon-text {
     text-align: center;
     color: white;
@@ -640,6 +644,7 @@ li {
     .resize-handle {
       display: none;
     }
+
     
     .control-button {
       width: 30px;

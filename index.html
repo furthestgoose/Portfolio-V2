@@ -429,59 +429,54 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.21.0/docxtemplater.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-        <script>
-            async function loadResume() {
-    try {
-        const response = await fetch('./assets/cv/CV.docx');
-        if (!response.ok) {
-            throw new Error('Failed to load resume');
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pizzip/3.1.4/pizzip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.21.0/docxtemplater.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+<script>
+    async function loadResume() {
+        try {
+            const response = await fetch('./assets/cv/CV.docx');
+            if (!response.ok) {
+                throw new Error('Failed to load resume');
+            }
+
+            const arrayBuffer = await response.arrayBuffer();
+
+            const zip = new PizZip(arrayBuffer);
+            const doc = new window.docxtemplater(zip);
+
+            const text = doc.getFullText();
+            const formattedText = text.split('\n').map(line => `<p>${line}</p>`).join('');
+
+            document.getElementById('resume-content').innerHTML = formattedText;
+        } catch (error) {
+            console.error('Error loading resume:', error);
+            document.getElementById('resume-content').innerHTML = '<p>Error loading resume.</p>';
         }
-
-        const arrayBuffer = await response.arrayBuffer();
-        const zip = new JSZip();
-        const content = await zip.loadAsync(arrayBuffer);
-
-        // Initialize docxtemplater correctly
-        const doc = new docxtemplater(content);
-        
-        // Extract text from paragraphs
-        const textParts = doc.getFullText().split('\n'); // Extracts text correctly
-        const formattedText = textParts.map(line => `<p>${line}</p>`).join('');
-
-        // Display the text inside the div
-        document.getElementById('resume-content').innerHTML = formattedText;
-    } catch (error) {
-        console.error('Error loading resume:', error);
-        document.getElementById('resume-content').innerHTML = '<p>Error loading resume.</p>';
     }
-}
 
-            function downloadResume() {
-            const link = document.createElement('a');
-            link.href = 'assets/cv/CV.docx';
-            link.download = 'resume.docx';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            }
+    function downloadResume() {
+        const link = document.createElement('a');
+        link.href = 'assets/cv/CV.docx';
+        link.download = 'resume.docx';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 
-            // Load resume content when the window is opened
-            document.addEventListener('windowOpened', function(e) {
-            if (e.detail.id === 'resume') {
-                loadResume();
-            }
-            });
-        </script>
+    document.addEventListener('windowOpened', function(e) {
+        if (e.detail.id === 'resume') {
+            loadResume();
+        }
+    });
+</script>
     <script>
-        // Window management
 let activeWindows = [];
 let zIndex = 100;
 let isMaximized = {};
 
-// Update time with AM/PM format
 function updateTime() {
     const now = new Date();
     let hours = now.getHours();
@@ -492,41 +487,34 @@ function updateTime() {
     document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
 }
 
-// Initialize windows and time
 function initWindows() {
-    // Set initial positions and properties for windows
     const windows = document.querySelectorAll('.window');
     windows.forEach((window) => {
         const id = window.id.replace('-window', '');
         isMaximized[id] = false;
         
-        // Add window border radius
         window.style.borderRadius = '5px';
         window.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
     });
     
-    // Update time
     updateTime();
     setInterval(updateTime, 60000);
 }
 
 function openWindow(id) {
     const windowElement = document.getElementById(`${id}-window`);
-    
-    // Close start menu if open
+
     if (document.getElementById('start-menu').style.display === 'block') {
         toggleStartMenu();
     }
     
     windowElement.style.display = 'block';
     
-    // Use a nicer cascading effect for Windows 7
     if (!isMaximized[id]) {
         const openCount = activeWindows.filter(w => w.style.display === 'block').length;
         windowElement.style.top = `${50 + openCount * 25}px`;
         windowElement.style.left = `${70 + openCount * 25}px`;
         
-        // Set default width/height for a more Windows 7 look if not already set
         if (!windowElement.style.width) {
             windowElement.style.width = '600px';
         }
@@ -546,7 +534,6 @@ function openWindow(id) {
 function closeWindow(id) {
     const windowElement = document.getElementById(`${id}-window`);
     
-    // Add a fade-out animation
     windowElement.style.transition = 'opacity 0.2s';
     windowElement.style.opacity = '0';
     
@@ -565,7 +552,6 @@ function closeWindow(id) {
 function minimizeWindow(id) {
     const windowElement = document.getElementById(`${id}-window`);
     
-    // Add a minimize animation
     windowElement.style.transition = 'transform 0.2s, opacity 0.2s';
     windowElement.style.transform = 'scale(0.8)';
     windowElement.style.opacity = '0';
@@ -576,7 +562,6 @@ function minimizeWindow(id) {
         windowElement.style.opacity = '1';
         windowElement.style.transition = '';
         
-        // Ensure the window stays in the taskbar
         if (!activeWindows.includes(windowElement)) {
             activeWindows.push(windowElement);
         }
@@ -587,7 +572,6 @@ function maximizeWindow(id) {
     const windowElement = document.getElementById(`${id}-window`);
     
     if (isMaximized[id]) {
-        // Restore window
         windowElement.style.top = windowElement.dataset.prevTop;
         windowElement.style.left = windowElement.dataset.prevLeft;
         windowElement.style.width = windowElement.dataset.prevWidth;
@@ -596,7 +580,6 @@ function maximizeWindow(id) {
         windowElement.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
         isMaximized[id] = false;
     } else {
-        // Maximize window
         windowElement.dataset.prevTop = windowElement.style.top;
         windowElement.dataset.prevLeft = windowElement.style.left;
         windowElement.dataset.prevWidth = windowElement.style.width || '600px';
@@ -605,7 +588,7 @@ function maximizeWindow(id) {
         windowElement.style.top = '0';
         windowElement.style.left = '0';
         windowElement.style.width = '100%';
-        windowElement.style.height = 'calc(100% - 40px)'; // Leave space for taskbar (40px for Win7)
+        windowElement.style.height = 'calc(100% - 40px)';
         windowElement.style.borderRadius = '0';
         windowElement.querySelector('.titlebar').style.borderRadius = '0';
         isMaximized[id] = true;
@@ -667,7 +650,6 @@ function toggleStartMenu() {
         startMenu.style.display = 'none';
     } else {
         startMenu.style.display = 'block';
-        // Add a slight fade-in animation
         startMenu.style.opacity = '0';
         startMenu.style.transform = 'translateY(10px)';
         startMenu.style.transition = 'opacity 0.2s, transform 0.2s';
@@ -679,7 +661,6 @@ function toggleStartMenu() {
     }
 }
 
-// Click outside to close start menu
 document.addEventListener('click', function(event) {
     const startMenu = document.getElementById('start-menu');
     const startButton = document.getElementById('start-button');
@@ -691,7 +672,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Make windows draggable
 function setupDraggableWindows() {
     document.querySelectorAll('.window').forEach(window => {
         const titlebar = window.querySelector('.titlebar');
@@ -705,16 +685,13 @@ function setupDraggableWindows() {
             
             const id = window.id.replace('-window', '');
             
-            // If maximized, restore first with special positioning
             if (isMaximized[id]) {
                 const mouseX = e.clientX;
                 const screenWidth = document.documentElement.clientWidth;
                 const newWidth = parseInt(window.dataset.prevWidth) || 600;
                 
-                // Calculate new left position based on mouse position
                 const newLeft = Math.max(0, Math.min(mouseX - (newWidth / 2), screenWidth - newWidth));
-                
-                // Restore at the new position
+
                 window.style.width = window.dataset.prevWidth;
                 window.style.height = window.dataset.prevHeight;
                 window.style.top = '0px';
@@ -725,14 +702,12 @@ function setupDraggableWindows() {
                 isMaximized[id] = false;
                 updateTaskbar();
                 
-                // Adjust mouse position to continue dragging smoothly
+
                 pos3 = e.clientX;
                 pos4 = e.clientY;
             } else {
-                // Make window active when dragging
                 makeWindowActive(id);
                 
-                // Get the cursor position at startup
                 pos3 = e.clientX;
                 pos4 = e.clientY;
             }
@@ -745,18 +720,15 @@ function setupDraggableWindows() {
             e = e || window.event;
             e.preventDefault();
             
-            // Calculate the new cursor position
             pos1 = pos3 - e.clientX;
             pos2 = pos4 - e.clientY;
             pos3 = e.clientX;
             pos4 = e.clientY;
             
-            // Set the element's new position
             const top = (window.offsetTop - pos2);
             const left = (window.offsetLeft - pos1);
             
-            // Don't allow the window to be dragged completely off-screen
-            // Leave at least 50px visible
+
             const maxTop = document.documentElement.clientHeight - 50;
             const maxLeft = document.documentElement.clientWidth - 50;
             
@@ -771,7 +743,6 @@ function setupDraggableWindows() {
     });
 }
 
-// Double click to maximize
 function setupMaximizeOnDoubleClick() {
     document.querySelectorAll('.titlebar').forEach(titlebar => {
         titlebar.addEventListener('dblclick', function() {
@@ -781,7 +752,6 @@ function setupMaximizeOnDoubleClick() {
     });
 }
 
-// Window content click activates window
 function setupWindowActivation() {
     document.querySelectorAll('.window').forEach(window => {
         window.addEventListener('mousedown', function() {
@@ -791,10 +761,8 @@ function setupWindowActivation() {
     });
 }
 
-// Aero Snap - Windows 7 feature to snap windows to sides
 function setupAeroSnap() {
     document.addEventListener('mousemove', function(e) {
-        // Only proceed if we're dragging a window
         if (!document.onmousemove) return;
         
         const screenTop = 0;
@@ -802,15 +770,12 @@ function setupAeroSnap() {
         const screenRight = window.innerWidth;
         const screenBottom = window.innerHeight;
         
-        // Check for top edge for maximize
         if (e.clientY <= screenTop + 10) {
             document.body.style.cursor = 'n-resize';
         } 
-        // Check for left edge for left-snap
         else if (e.clientX <= screenLeft + 10) {
             document.body.style.cursor = 'w-resize';
         }
-        // Check for right edge for right-snap
         else if (e.clientX >= screenRight - 10) {
             document.body.style.cursor = 'e-resize';
         }
@@ -838,7 +803,6 @@ function setupResizableWindows() {
         const startLeft = parseInt(document.defaultView.getComputedStyle(window).left, 10);
         
         function doDrag(e) {
-          // Original directions
           if (handleType === 'e') {
             window.style.width = (startWidth + e.clientX - startX) + 'px';
           } else if (handleType === 's') {
@@ -850,7 +814,6 @@ function setupResizableWindows() {
             window.style.height = (startHeight - e.clientY + startY) + 'px';
             window.style.top = (startTop + e.clientY - startY) + 'px';
           } 
-          // Diagonal directions
           else if (handleType === 'ne') {
             window.style.width = (startWidth + e.clientX - startX) + 'px';
             window.style.height = (startHeight - e.clientY + startY) + 'px';
@@ -889,27 +852,22 @@ function setupDesktopSelection() {
     let startY = 0;
     let isSelecting = false;
 
-    // Handle mouse down on desktop
     desktop.addEventListener('mousedown', function(e) {
-        // Only proceed if clicking directly on the desktop (not on windows or icons)
         if (e.target !== desktop && !desktop.contains(e.target)) return;
         if (e.target.closest('.window') || e.target.closest('.icon') || e.target.closest('#taskbar') || e.target.closest('#start-menu')) return;
-        
-        // Create selection box
+
         selectionBox = document.createElement('div');
         selectionBox.className = 'selection-box';
         selectionBox.style.position = 'absolute';
         selectionBox.style.border = '1px dotted #0078d7';
         selectionBox.style.backgroundColor = 'rgba(0, 120, 215, 0.2)';
-        selectionBox.style.pointerEvents = 'none'; // Let mouse events pass through
+        selectionBox.style.pointerEvents = 'none'; 
         selectionBox.style.zIndex = '50';
         desktop.appendChild(selectionBox);
         
-        // Record starting position
         startX = e.clientX;
         startY = e.clientY;
         
-        // Set initial position and size
         selectionBox.style.left = startX + 'px';
         selectionBox.style.top = startY + 'px';
         selectionBox.style.width = '0px';
@@ -918,18 +876,15 @@ function setupDesktopSelection() {
         isSelecting = true;
     });
     
-    // Handle mouse move while selecting
     document.addEventListener('mousemove', function(e) {
         if (!isSelecting || !selectionBox) return;
         
-        // Calculate new dimensions
         const currentX = e.clientX;
         const currentY = e.clientY;
         
         const width = Math.abs(currentX - startX);
         const height = Math.abs(currentY - startY);
-        
-        // Set new position (handle selection in any direction)
+
         if (currentX < startX) {
             selectionBox.style.left = currentX + 'px';
         } else {
@@ -945,11 +900,9 @@ function setupDesktopSelection() {
         selectionBox.style.width = width + 'px';
         selectionBox.style.height = height + 'px';
         
-        // Optional: Check for icons within the selection box
         checkIconSelection(selectionBox);
     });
-    
-    // Handle mouse up to end selection
+
     document.addEventListener('mouseup', function() {
         if (isSelecting) {
             // Clean up
@@ -962,7 +915,6 @@ function setupDesktopSelection() {
     });
 }
 
-// Helper function to highlight icons that are within the selection box
 function checkIconSelection(selectionBox) {
     const icons = document.querySelectorAll('.icon');
     const selectionRect = selectionBox.getBoundingClientRect();
@@ -970,7 +922,6 @@ function checkIconSelection(selectionBox) {
     icons.forEach(icon => {
         const iconRect = icon.getBoundingClientRect();
         
-        // Check if icon is within selection box (even partially)
         const overlap = !(
             selectionRect.right < iconRect.left || 
             selectionRect.left > iconRect.right || 
@@ -978,7 +929,6 @@ function checkIconSelection(selectionBox) {
             selectionRect.top > iconRect.bottom
         );
         
-        // Apply selected styling
         if (overlap) {
             icon.classList.add('selected');
         } else {
@@ -986,8 +936,6 @@ function checkIconSelection(selectionBox) {
         }
     });
 }
-
-// Add a style for selected icons
 function addIconSelectionStyles() {
     const style = document.createElement('style');
     style.textContent = `
@@ -1001,7 +949,6 @@ function addIconSelectionStyles() {
 }
 
 function initializeMobileSupport() {
-  // Detect if we're on a mobile device
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
   if (isMobile) {
@@ -1011,17 +958,14 @@ function initializeMobileSupport() {
 }
 
 function adjustForMobile() {
-  // Set all windows to be maximized by default on mobile
   document.querySelectorAll('.window').forEach(window => {
     const id = window.id.replace('-window', '');
     isMaximized[id] = true;
   });
-  
-  // Simplify the UI by showing only one window at a time
+
   document.addEventListener('windowOpened', function(e) {
     const openedId = e.detail.id;
     
-    // Hide all other windows
     activeWindows.forEach(win => {
       const winId = win.id.split('-')[0];
       if (winId !== openedId) {
@@ -1030,14 +974,12 @@ function adjustForMobile() {
     });
   });
   
-  // Ensure proper scaling of content
   document.querySelector('meta[name="viewport"]').setAttribute(
     'content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
   );
 }
 
 function setupTouchControls() {
-  // Convert double-tap to maximizing windows
   document.querySelectorAll('.titlebar').forEach(titlebar => {
     let lastTap = 0;
     titlebar.addEventListener('touchend', function(e) {
@@ -1055,7 +997,6 @@ function setupTouchControls() {
     });
   });
   
-  // Setup touch events for dragging windows
   document.querySelectorAll('.window').forEach(window => {
     const titlebar = window.querySelector('.titlebar');
     let touchStartX, touchStartY;
@@ -1064,7 +1005,6 @@ function setupTouchControls() {
     titlebar.addEventListener('touchstart', function(e) {
       const id = window.id.replace('-window', '');
       
-      // Only allow dragging if not maximized
       if (!isMaximized[id]) {
         const touch = e.touches[0];
         touchStartX = touch.clientX;
@@ -1088,7 +1028,7 @@ function setupTouchControls() {
         window.style.left = (windowStartX + deltaX) + 'px';
         window.style.top = (windowStartY + deltaY) + 'px';
         
-        e.preventDefault(); // Prevent scrolling while dragging
+        e.preventDefault(); 
       }
     });
     
@@ -1098,7 +1038,6 @@ function setupTouchControls() {
     });
   });
   
-  // Make icons work with touch
   document.querySelectorAll('.icon').forEach(icon => {
     let touchTimeout;
     
@@ -1106,13 +1045,12 @@ function setupTouchControls() {
       const that = this;
       touchTimeout = setTimeout(function() {
         that.classList.add('selected');
-      }, 500); // Long press to select
+      }, 500);
     });
     
     icon.addEventListener('touchend', function(e) {
       clearTimeout(touchTimeout);
       
-      // If it wasn't a long press, treat as click
       if (!this.classList.contains('selected')) {
         const action = this.getAttribute('onclick');
         if (action) {
@@ -1120,7 +1058,6 @@ function setupTouchControls() {
         }
       }
       
-      // Clear selection after a brief delay
       setTimeout(() => {
         this.classList.remove('selected');
       }, 300);
@@ -1129,7 +1066,6 @@ function setupTouchControls() {
     });
   });
   
-  // Adjust the start menu for touch
   const startButton = document.getElementById('start-button');
   startButton.addEventListener('touchend', function(e) {
     toggleStartMenu();
@@ -1137,24 +1073,21 @@ function setupTouchControls() {
   });
 }
 
-// Add event dispatch functionality
 function openWindow(id) {
   const windowElement = document.getElementById(`${id}-window`);
   
-  // Close start menu if open
   if (document.getElementById('start-menu').style.display === 'block') {
     toggleStartMenu();
   }
   
   windowElement.style.display = 'block';
   
-  // Use a nicer cascading effect for Windows 7
+
   if (!isMaximized[id]) {
     const openCount = activeWindows.filter(w => w.style.display === 'block').length;
     windowElement.style.top = `${50 + openCount * 25}px`;
     windowElement.style.left = `${70 + openCount * 25}px`;
     
-    // Set default width/height for a more Windows 7 look if not already set
     if (!windowElement.style.width) {
       windowElement.style.width = '600px';
     }
@@ -1170,14 +1103,12 @@ function openWindow(id) {
     updateTaskbar();
   }
   
-  // Dispatch event for mobile handling
   const event = new CustomEvent('windowOpened', { 
     detail: { id: id }
   });
   document.dispatchEvent(event);
 }
 
-// Initialize everything on window load
 window.onload = function() {
     openWindow('about');
     initializeMobileSupport();
@@ -1187,10 +1118,8 @@ window.onload = function() {
     setupWindowActivation();
     setupAeroSnap();
     setupResizableWindows();
-    setupDesktopSelection(); // Add this line
+    setupDesktopSelection(); 
     addIconSelectionStyles();
-    
-    // Open a default window
     
 };
     </script>
