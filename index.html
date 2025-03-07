@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam's Portfolio!</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X113NHTN0L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X113NHTN0L', {
+    'send_page_view': true
+  });
+</script>
+</head>
+<body>
+    <div id="desktop">
+        <!-- Desktop Icons -->
+        <div class="icon" onclick="openWindow('about')">
+            <div class="icon-image">
+                <img src="https://img.icons8.com/skeuomorphism/32/info.png" alt="Icon">
+              </div>
+            <div class="icon-text">About Me.exe</div>
+        </div>
+        
+        <div class="icon" onclick="openWindow('projects')">
+            <div class="icon-image">
+                <img src="https://img.icons8.com/skeuomorphism/32/binders-folder.png" alt="Icon">
+              </div>
+            <div class="icon-text">Projects.exe</div>
+        </div>
+        
+        <div class="icon" onclick="openWindow('resume')">
+            <div class="icon-image">
+                <img src="https://img.icons8.com/skeuomorphism/32/contract.png" alt="Icon">
+              </div>
+            <div class="icon-text">CV.docx</div>
+        </div>
+        
+        <div class="icon" onclick="openWindow('contact')">
+            <div class="icon-image">
+                <img src="https://img.icons8.com/skeuomorphism/32/open-envelope.png" alt="Icon">
+              </div>
+            <div class="icon-text">Contact.exe</div>
+        </div>
+        
+        <!-- Windows -->
+        <div id="about-window" class="window" data-title="About Me.exe">
+            <div class="titlebar">
+                <div class="title">About Me.exe</div>
+                <div class="window-controls">
+                    <div class="control-button minimize" onclick="minimizeWindow('about')">_</div>
+                    <div class="control-button maximize" onclick="maximizeWindow('about')">□</div>
+                    <div class="control-button close" onclick="closeWindow('about')">✕</div>
+                </div>
+            </div>
+            <div class="window-content about-content">
+                <h2>About Me</h2>
+                <img src="assets/project_images/me.jpeg" alt="Adam" style="width: 50%; height: auto; display: block; margin: 15px auto;">
+                <h3 style="text-align: center;">Adam Byford - Student Software Engineer</h3>
+                <div style="text-align: center;">
+                    <p>I'm a 19 year old undergraduate studying software engineering at the University of Leicester currently in my 2nd year.
+                        My favourite modules I have completed so far are: UI Design & Evaluation,Software Architecture, and Databases and Domain modelling</p>
+                    <p>I develop a wide variety of software with a particular focus on App and web development.
+                    Some of my favourite projects I've completed are my IOS incremental game and this portfolio website you're currently on.</p>
+                    <h3>Languages</h3>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Swift</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Java</span>
+                    </div>
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Next.js</span>
+                        <span class="tag">Tailwind CSS</span>
+                        <span class="tag">SwiftUI</span>
+                        <span class="tag">Swift Data</span>
+                        <span class="tag">Spring MVC</span>
+                    </div>
+                    <h3>Tools</h3>
+                    <div class="tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Microsoft Office Suite</span>
+                    </div>
+                </div>
+            </div>
+            <div class="resize-handle resize-handle-w"></div>
+            <div class="resize-handle resize-handle-e"></div>
+            <div class="resize-handle resize-handle-s"></div>
+            <div class="resize-handle resize-handle-n"></div>
+            <div class="resize-handle resize-handle-ne"></div>
+            <div class="resize-handle resize-handle-nw"></div>
+            <div class="resize-handle resize-handle-se"></div>
+            <div class="resize-handle resize-handle-sw"></div>
+        </div>
+        
+        <div id="projects-window" class="window" data-title="Projects.exe">
+            <div class="titlebar">
+                <div class="title">Projects.exe</div>
+                <div class="window-controls">
+                    <div class="control-button minimize" onclick="minimizeWindow('projects')">_</div>
+                    <div class="control-button maximize" onclick="maximizeWindow('projects')">□</div>
+                    <div class="control-button close" onclick="closeWindow('projects')">✕</div>
+                </div>
+            </div>
+            <div class="window-content projects-content">
+                <h2>My Projects</h2>
+
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 7th March 2025
+                    </div>
+                    <h3>Portfolio Website V2</h3>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <p>This is the Second iteration of my portfolio website, showcasing my projects and skills.</p>
+                </div>
+                
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 3rd March 2025
+                    </div>
+                    <h3>Journal Electron App</h3>
+                    <div class="tags">
+                        <span class="tag">Electron</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Pixel Art Studio</span>
+                        <span class="tag">Figma</span>
+                    </div>
+                    <img src="https://github.com/user-attachments/assets/49bfb38d-4150-425e-a9c6-0eb7290bf900" alt="Journal Electron App" style="width: 150px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Designed a Journal app in figma and developed it using Electron and SQLite 3. Pixel art elements hand drawn in Pixel Studio. User can write,view, update and delete entries as well as being able to export all entries to a text file and mass delete entries.</p>
+                    
+         
+                    <button onclick="window.location.href='https://furthestgoose.github.io/Journal-app/'">More Information</button>
+                </div>
+                
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 25th January 2025
+                    </div>
+                    <h3>Keyboard E-shop</h3>
+                    <div class="tags">
+                        <span class="tag">Next.JS</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Tailwind CSS</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">API Integration</span>
+                        <span class="tag">Spring MVC</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+                    <img src="https://github.com/user-attachments/assets/66a15f02-d942-4c0c-8118-826c2f9d6f12" alt="Keyboard E-shop" style="width: 300px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Developed a Keyboard E-shop in typescript using Next.js and Tailwind for the front end, the user is able to browse products and add them to their cart but there is no payment API implemented. Fetching products was implemented using api calls to a custom Spring MVC program which fetched product details from a MySQL database.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/financial-tracker/'">More Information</button>
+                </div>
+                
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 31st October 2024
+                    </div>
+                    <h3>Financial Tracker</h3>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Tailwind CSS</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">API Integration</span>
+                        <span class="tag">Firebase</span>
+                    </div>
+                    <img src="https://github.com/user-attachments/assets/5f2dc216-f5ed-48b2-862a-422f3b5164c9" alt="Keyboard E-shop" style="width: 300px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Developed a financial tracker web app in typescript using react, firebase and tailwind to enable tracking of the users financial health via logging income,expenses and investments. Real time price of the investments is shown via API Integration.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/tailored_type/'">More Information</button>
+                </div>
+
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 17th October 2024
+                    </div>
+                    <h3>Portfolio Website V1</h3>
+                    <div class="tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">HTML</span>
+                    </div>
+                    <img src="assets/project_images/portfoliov1.png" alt="Portfolio V1" style="width: 300px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Designed and developed a responsive portfolio website to showcase projects and professional experience.Created dynamic visual effects, including a mouse-responsive gradient background.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/Portfolio-V1/'">View Project</button>
+                </div>
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 16th September 2024
+                    </div>
+                    <h3>IOS Incremental Game</h3>
+                    <div class="tags">
+                        <span class="tag">Swift</span>
+                        <span class="tag">SwiftUI</span>
+                        <span class="tag">Swift Data</span>
+                    </div>
+                    <img src="https://github.com/user-attachments/assets/10aae4d5-ace5-4d51-99aa-e659ce853783" alt="IOS Incremental Game" style="width: 150px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Developed an incremental game based around the journey from classical to quantum computers for IOS devices using SwiftUI and Swift Data to manage game state.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/Quantum-Clicker/'">More Information</button>
+                </div>
+
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 30th May 2024
+                    </div>
+                    <h3>Media Based Matching App</h3>
+                    <div class="tags">
+                        <span class="tag">Swift</span>
+                        <span class="tag">SwiftUI</span>
+                        <span class="tag">Swift Data</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">TMDB API</span>
+                        <span class="tag">ADMob</span>
+                    </div>
+                    <img src="https://github.com/furthestgoose/Media-Match/assets/77462614/19d15878-8254-49c7-b2d8-2ff3e9ed65a9" alt="Media Based Matching App" style="width: 300px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Developed a media-based matching app using SwiftUI and Firebase to allow users to find content they both want to watch.Users connect via a friends system which is powered by firebase and then are shown various movies whose details are retrieved through the TMDB API.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/Media-Match/'">More Information</button>
+                </div>
+
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 21st May 2024
+                    </div>
+                    <h3>IOS To Do List App</h3>
+                    <div class="tags">
+                        <span class="tag">Swift</span>
+                        <span class="tag">SwiftUI</span>
+                        <span class="tag">Swift Data</span>
+                    </div>
+                    <img src="https://github.com/furthestgoose/To-Do-app/assets/77462614/14ca31d8-279d-4f64-b1e9-298f45a2344c" alt="IOS To Do List App" style="width: 150px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Developed a to do list app using Swift and SwiftUI for IOS devices. I used Swift Data to store the data for the app and ensured compatibility with Ipads.</p>
+                    <button onclick="window.location.href='https://github.com/furthestgoose/To-Do-app'">More Information</button>
+                </div>
+
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 11th May 2024
+                    </div>
+                    <h3>AI Storyteller</h3>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Transformers.js</span>
+                        <span class="tag">GSAP</span>
+                    </div>
+                    <img src="assets/project_images/Ai_Storyteller.png" alt="AI Storyteller" style="width: 300px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Developed an AI Storyteller website using a Transformers.js LLM model to create interactive stories based on user input and GSAP to create an interactive home page.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/InkForge/'">View Demo</button>
+                </div>
+
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 6th May 2024
+                    </div>
+                    <h3>Discord Economy Bot</h3>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Pycord</span>
+                    </div>
+                    <img src="https://github.com/furthestgoose/Economy-Bot/assets/77462614/a57d0340-2ae8-4701-b4bc-57b8a9b8c9c9" alt="Discord Economy-Bot" style="width: 300px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Developed a discord bot that allows users to earn currency through various commands and minigames. The bot uses SQLite to store user data and pycord to interact with the discord API.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/Economy-Bot/'">More Information</button>
+                </div>
+
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 7th April 2024
+                    </div>
+                    <h3>Dart Weather CLI App</h3>
+                    <div class="tags">
+                        <span class="tag">Dart</span>
+                        <span class="tag">API Integration</span>
+                    </div>
+                    <p>Developed a weather app using dart that allows you to access the weather for any city in the world through a command line tool using the WeatherAPI.com API.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/Weather-CLI-App/'">More Information</button>
+                </div>
+
+                <div class="project">
+                    <div class="date">
+                        <strong>Completed:</strong> 25th February 2024
+                    </div>
+                    <h3>Pokemon Guessing Game</h3>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">PokeAPI</span>
+                        <span class="tag">Electron</span>
+                    </div>
+                    <img src="https://github.com/furthestgoose/Who-s-that-pokemon-/assets/77462614/e4fe29c0-a2c5-4bb9-a4b2-debe7cd43d61" alt="Pokemon Guessing Game" style="width: 300px; height: auto; left:0%; margin-top: 15px;">
+                    <p>Developed a Pokemon guessing game using the PokeAPI and Electron as a chance to learn how to implement Electron and leverage APIs within my projects.</p>
+                    <button onclick="window.location.href='https://furthestgoose.github.io/Who-s-that-pokemon-/'">More Information</button>
+                </div>
+                
+            </div>
+            <div class="resize-handle resize-handle-w"></div>
+            <div class="resize-handle resize-handle-e"></div>
+            <div class="resize-handle resize-handle-s"></div>
+            <div class="resize-handle resize-handle-n"></div>
+            <div class="resize-handle resize-handle-ne"></div>
+            <div class="resize-handle resize-handle-nw"></div>
+            <div class="resize-handle resize-handle-se"></div>
+            <div class="resize-handle resize-handle-sw"></div>
+        </div>
+        
+        <div id="resume-window" class="window" data-title="Resume.doc">
+            <div class="titlebar">
+            <div class="title">Resume.doc</div>
+            <div class="window-controls">
+                <div class="control-button minimize" onclick="minimizeWindow('resume')">_</div>
+                <div class="control-button maximize" onclick="maximizeWindow('resume')">□</div>
+                <div class="control-button close" onclick="closeWindow('resume')">✕</div>
+            </div>
+            </div>
+            <div class="window-content resume-content">
+            <h2>Resume</h2>
+            <div id="resume-content">
+                <!-- Resume content will be loaded here -->
+            </div>
+            <button onclick="downloadResume()">Download Resume</button>
+            </div>
+            <div class="resize-handle resize-handle-w"></div>
+            <div class="resize-handle resize-handle-e"></div>
+            <div class="resize-handle resize-handle-s"></div>
+            <div class="resize-handle resize-handle-n"></div>
+            <div class="resize-handle resize-handle-ne"></div>
+            <div class="resize-handle resize-handle-nw"></div>
+            <div class="resize-handle resize-handle-se"></div>
+            <div class="resize-handle resize-handle-sw"></div>
+        </div>
+
+        
+        <div id="contact-window" class="window" data-title="Contact.exe">
+            <div class="titlebar">
+            <div class="title">Contact.exe</div>
+            <div class="window-controls">
+                    <div class="control-button minimize" onclick="minimizeWindow('contact')">_</div>
+                    <div class="control-button maximize" onclick="maximizeWindow('contact')">□</div>
+                    <div class="control-button close" onclick="closeWindow('contact')">✕</div>
+                </div>
+            </div>
+            <div class="window-content contact-content">
+                <h2>Contact Me</h2>
+                <form id="contact-form" action="https://formsubmit.co/adamby20@gmail.com" method="POST">
+                    <div style="margin-bottom: 10px;">
+                        <label for="name">Name:</label><br>
+                        <input type="text" id="name" name="name" style="width: 100%;">
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email" style="width: 100%;">
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label for="message">Message:</label><br>
+                        <textarea id="message" name="message" rows="5" style="width: 100%;"></textarea>
+                    </div>
+                    
+                    <button type="submit">Send Message</button>
+                </form>
+                
+                <div style="margin-top: 20px;">
+                    <h3>Contact Information</h3>
+                    <p>LinkedIn: <a href="https://www.linkedin.com/in/adam-software-engineer/">https://www.linkedin.com/in/adam-software-engineer/</a></p>
+                    <p>GitHub: <a href="https://github.com/furthestgoose">https://github.com/furthestgoose</a></p>
+                </div>
+            </div>
+            <div class="resize-handle resize-handle-w"></div>
+            <div class="resize-handle resize-handle-e"></div>
+            <div class="resize-handle resize-handle-s"></div>
+            <div class="resize-handle resize-handle-n"></div>
+            <div class="resize-handle resize-handle-ne"></div>
+            <div class="resize-handle resize-handle-nw"></div>
+            <div class="resize-handle resize-handle-se"></div>
+            <div class="resize-handle resize-handle-sw"></div>
+        </div>
+        
+        <!-- Taskbar -->
+        <div id="taskbar">
+            <div id="start-button" onclick="toggleStartMenu()">
+                <img src="https://img.icons8.com/skeuomorphism/32/circled-play.png" alt="Start"> Start
+            </div>
+            <div id="open-windows">
+                <!-- Populated dynamically -->
+            </div>
+            <div id="time">3:45 PM</div>
+        </div>
+        
+        <!-- Start Menu -->
+        <div id="start-menu">
+            <div class="start-item" onclick="openWindow('about'); toggleStartMenu();">
+                <img src="https://img.icons8.com/skeuomorphism/32/info.png" alt="About"> About Me
+            </div>
+            <div class="start-item" onclick="openWindow('projects'); toggleStartMenu();">
+                <img src="https://img.icons8.com/skeuomorphism/32/binders-folder.png" alt="Projects"> Projects
+            </div>
+            <div class="start-item" onclick="openWindow('resume'); toggleStartMenu();">
+                <img src="https://img.icons8.com/skeuomorphism/32/contract.png" alt="Resume"> Resume
+            </div>
+            <div class="start-item" onclick="openWindow('contact'); toggleStartMenu();">
+                <img src="https://img.icons8.com/skeuomorphism/32/open-envelope.png" alt="Contact"> CV
+            </div>
+            <div class="start-item" style="border-top: 1px solid var(--border-dark); margin-top: 5px;" onclick="toggleStartMenu();">
+                <img src="https://img.icons8.com/skeuomorphism/32/close-window.png" alt="Close"> Close Menu
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.21.0/docxtemplater.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+        <script>
+            async function loadResume() {
+    try {
+        const response = await fetch('./assets/cv/CV.docx');
+        if (!response.ok) {
+            throw new Error('Failed to load resume');
+        }
+
+        const arrayBuffer = await response.arrayBuffer();
+        const zip = new JSZip();
+        const content = await zip.loadAsync(arrayBuffer);
+
+        // Initialize docxtemplater correctly
+        const doc = new docxtemplater(content);
+        
+        // Extract text from paragraphs
+        const textParts = doc.getFullText().split('\n'); // Extracts text correctly
+        const formattedText = textParts.map(line => `<p>${line}</p>`).join('');
+
+        // Display the text inside the div
+        document.getElementById('resume-content').innerHTML = formattedText;
+    } catch (error) {
+        console.error('Error loading resume:', error);
+        document.getElementById('resume-content').innerHTML = '<p>Error loading resume.</p>';
+    }
+}
+
+            function downloadResume() {
+            const link = document.createElement('a');
+            link.href = 'assets/cv/CV.docx';
+            link.download = 'resume.docx';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            }
+
+            // Load resume content when the window is opened
+            document.addEventListener('windowOpened', function(e) {
+            if (e.detail.id === 'resume') {
+                loadResume();
+            }
+            });
+        </script>
+    <script>
+        // Window management
+let activeWindows = [];
+let zIndex = 100;
+let isMaximized = {};
+
+// Update time with AM/PM format
+function updateTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Convert 0 to 12
+    document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
+}
+
+// Initialize windows and time
+function initWindows() {
+    // Set initial positions and properties for windows
+    const windows = document.querySelectorAll('.window');
+    windows.forEach((window) => {
+        const id = window.id.replace('-window', '');
+        isMaximized[id] = false;
+        
+        // Add window border radius
+        window.style.borderRadius = '5px';
+        window.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
+    });
+    
+    // Update time
+    updateTime();
+    setInterval(updateTime, 60000);
+}
+
+function openWindow(id) {
+    const windowElement = document.getElementById(`${id}-window`);
+    
+    // Close start menu if open
+    if (document.getElementById('start-menu').style.display === 'block') {
+        toggleStartMenu();
+    }
+    
+    windowElement.style.display = 'block';
+    
+    // Use a nicer cascading effect for Windows 7
+    if (!isMaximized[id]) {
+        const openCount = activeWindows.filter(w => w.style.display === 'block').length;
+        windowElement.style.top = `${50 + openCount * 25}px`;
+        windowElement.style.left = `${70 + openCount * 25}px`;
+        
+        // Set default width/height for a more Windows 7 look if not already set
+        if (!windowElement.style.width) {
+            windowElement.style.width = '600px';
+        }
+        if (!windowElement.style.height) {
+            windowElement.style.height = '400px';
+        }
+    }
+    
+    makeWindowActive(id);
+    
+    if (!activeWindows.includes(windowElement)) {
+        activeWindows.push(windowElement);
+        updateTaskbar();
+    }
+}
+
+function closeWindow(id) {
+    const windowElement = document.getElementById(`${id}-window`);
+    
+    // Add a fade-out animation
+    windowElement.style.transition = 'opacity 0.2s';
+    windowElement.style.opacity = '0';
+    
+    setTimeout(() => {
+        windowElement.style.display = 'none';
+        windowElement.style.opacity = '1';
+        windowElement.style.transition = '';
+        
+        const index = activeWindows.indexOf(windowElement);
+        if (index > -1) {
+            activeWindows.splice(index, 1);
+            updateTaskbar();
+        }
+    }, 200);
+}
+function minimizeWindow(id) {
+    const windowElement = document.getElementById(`${id}-window`);
+    
+    // Add a minimize animation
+    windowElement.style.transition = 'transform 0.2s, opacity 0.2s';
+    windowElement.style.transform = 'scale(0.8)';
+    windowElement.style.opacity = '0';
+    
+    setTimeout(() => {
+        windowElement.style.display = 'none';
+        windowElement.style.transform = 'scale(1)';
+        windowElement.style.opacity = '1';
+        windowElement.style.transition = '';
+        
+        // Ensure the window stays in the taskbar
+        if (!activeWindows.includes(windowElement)) {
+            activeWindows.push(windowElement);
+        }
+    }, 200);
+}
+
+function maximizeWindow(id) {
+    const windowElement = document.getElementById(`${id}-window`);
+    
+    if (isMaximized[id]) {
+        // Restore window
+        windowElement.style.top = windowElement.dataset.prevTop;
+        windowElement.style.left = windowElement.dataset.prevLeft;
+        windowElement.style.width = windowElement.dataset.prevWidth;
+        windowElement.style.height = windowElement.dataset.prevHeight;
+        windowElement.style.borderRadius = '5px';
+        windowElement.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
+        isMaximized[id] = false;
+    } else {
+        // Maximize window
+        windowElement.dataset.prevTop = windowElement.style.top;
+        windowElement.dataset.prevLeft = windowElement.style.left;
+        windowElement.dataset.prevWidth = windowElement.style.width || '600px';
+        windowElement.dataset.prevHeight = windowElement.style.height || '400px';
+        
+        windowElement.style.top = '0';
+        windowElement.style.left = '0';
+        windowElement.style.width = '100%';
+        windowElement.style.height = 'calc(100% - 40px)'; // Leave space for taskbar (40px for Win7)
+        windowElement.style.borderRadius = '0';
+        windowElement.querySelector('.titlebar').style.borderRadius = '0';
+        isMaximized[id] = true;
+    }
+    
+    makeWindowActive(id);
+    updateTaskbar();
+}
+
+function makeWindowActive(id) {
+    const windowElement = document.getElementById(`${id}-window`);
+    
+    document.querySelectorAll('.window').forEach(win => {
+        win.classList.remove('active');
+    });
+    
+    windowElement.classList.add('active');
+    windowElement.style.zIndex = ++zIndex;
+    updateTaskbar();
+}
+
+function updateTaskbar() {
+    const taskbarContainer = document.getElementById('open-windows');
+    taskbarContainer.innerHTML = '';
+    
+    activeWindows.forEach(win => {
+        if (win.style.display !== 'none') {
+            const winId = win.id.split('-')[0];
+            const title = win.dataset.title || win.querySelector('.title').textContent;
+            
+            const taskButton = document.createElement('div');
+            taskButton.className = 'taskbar-item';
+            if (win.classList.contains('active')) {
+                taskButton.classList.add('active');
+            }
+            taskButton.dataset.id = winId;
+            taskButton.textContent = title;
+            
+            taskButton.onclick = function() {
+                if (win.style.display === 'none') {
+                    win.style.display = 'block';
+                    makeWindowActive(winId);
+                } else if (win.classList.contains('active')) {
+                    minimizeWindow(winId);
+                } else {
+                    makeWindowActive(winId);
+                }
+            };
+            
+            taskbarContainer.appendChild(taskButton);
+        }
+    });
+}
+
+// Start menu
+function toggleStartMenu() {
+    const startMenu = document.getElementById('start-menu');
+    if (startMenu.style.display === 'block') {
+        startMenu.style.display = 'none';
+    } else {
+        startMenu.style.display = 'block';
+        // Add a slight fade-in animation
+        startMenu.style.opacity = '0';
+        startMenu.style.transform = 'translateY(10px)';
+        startMenu.style.transition = 'opacity 0.2s, transform 0.2s';
+        
+        setTimeout(() => {
+            startMenu.style.opacity = '1';
+            startMenu.style.transform = 'translateY(0)';
+        }, 10);
+    }
+}
+
+// Click outside to close start menu
+document.addEventListener('click', function(event) {
+    const startMenu = document.getElementById('start-menu');
+    const startButton = document.getElementById('start-button');
+    
+    if (startMenu.style.display === 'block' && 
+        !startMenu.contains(event.target) && 
+        !startButton.contains(event.target)) {
+        startMenu.style.display = 'none';
+    }
+});
+
+// Make windows draggable
+function setupDraggableWindows() {
+    document.querySelectorAll('.window').forEach(window => {
+        const titlebar = window.querySelector('.titlebar');
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        
+        titlebar.onmousedown = dragMouseDown;
+        
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            
+            const id = window.id.replace('-window', '');
+            
+            // If maximized, restore first with special positioning
+            if (isMaximized[id]) {
+                const mouseX = e.clientX;
+                const screenWidth = document.documentElement.clientWidth;
+                const newWidth = parseInt(window.dataset.prevWidth) || 600;
+                
+                // Calculate new left position based on mouse position
+                const newLeft = Math.max(0, Math.min(mouseX - (newWidth / 2), screenWidth - newWidth));
+                
+                // Restore at the new position
+                window.style.width = window.dataset.prevWidth;
+                window.style.height = window.dataset.prevHeight;
+                window.style.top = '0px';
+                window.style.left = newLeft + 'px';
+                window.style.borderRadius = '5px';
+                window.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
+                
+                isMaximized[id] = false;
+                updateTaskbar();
+                
+                // Adjust mouse position to continue dragging smoothly
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+            } else {
+                // Make window active when dragging
+                makeWindowActive(id);
+                
+                // Get the cursor position at startup
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+            }
+            
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+        
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            
+            // Calculate the new cursor position
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            
+            // Set the element's new position
+            const top = (window.offsetTop - pos2);
+            const left = (window.offsetLeft - pos1);
+            
+            // Don't allow the window to be dragged completely off-screen
+            // Leave at least 50px visible
+            const maxTop = document.documentElement.clientHeight - 50;
+            const maxLeft = document.documentElement.clientWidth - 50;
+            
+            window.style.top = `${Math.max(0, Math.min(top, maxTop))}px`;
+            window.style.left = `${Math.max(0, Math.min(left, maxLeft))}px`;
+        }
+        
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    });
+}
+
+// Double click to maximize
+function setupMaximizeOnDoubleClick() {
+    document.querySelectorAll('.titlebar').forEach(titlebar => {
+        titlebar.addEventListener('dblclick', function() {
+            const windowId = this.parentElement.id.split('-')[0];
+            maximizeWindow(windowId);
+        });
+    });
+}
+
+// Window content click activates window
+function setupWindowActivation() {
+    document.querySelectorAll('.window').forEach(window => {
+        window.addEventListener('mousedown', function() {
+            const windowId = this.id.split('-')[0];
+            makeWindowActive(windowId);
+        });
+    });
+}
+
+// Aero Snap - Windows 7 feature to snap windows to sides
+function setupAeroSnap() {
+    document.addEventListener('mousemove', function(e) {
+        // Only proceed if we're dragging a window
+        if (!document.onmousemove) return;
+        
+        const screenTop = 0;
+        const screenLeft = 0;
+        const screenRight = window.innerWidth;
+        const screenBottom = window.innerHeight;
+        
+        // Check for top edge for maximize
+        if (e.clientY <= screenTop + 10) {
+            document.body.style.cursor = 'n-resize';
+        } 
+        // Check for left edge for left-snap
+        else if (e.clientX <= screenLeft + 10) {
+            document.body.style.cursor = 'w-resize';
+        }
+        // Check for right edge for right-snap
+        else if (e.clientX >= screenRight - 10) {
+            document.body.style.cursor = 'e-resize';
+        }
+        else {
+            document.body.style.cursor = 'default';
+        }
+    });
+    
+    document.addEventListener('mouseup', function() {
+        document.body.style.cursor = 'default';
+    });
+}
+function setupResizableWindows() {
+  document.querySelectorAll('.window').forEach(window => {
+    const resizeHandles = window.querySelectorAll('.resize-handle');
+    resizeHandles.forEach(handle => {
+      handle.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        const handleType = handle.classList[1].split('-')[2];
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startWidth = parseInt(document.defaultView.getComputedStyle(window).width, 10);
+        const startHeight = parseInt(document.defaultView.getComputedStyle(window).height, 10);
+        const startTop = parseInt(document.defaultView.getComputedStyle(window).top, 10);
+        const startLeft = parseInt(document.defaultView.getComputedStyle(window).left, 10);
+        
+        function doDrag(e) {
+          // Original directions
+          if (handleType === 'e') {
+            window.style.width = (startWidth + e.clientX - startX) + 'px';
+          } else if (handleType === 's') {
+            window.style.height = (startHeight + e.clientY - startY) + 'px';
+          } else if (handleType === 'w') {
+            window.style.width = (startWidth - e.clientX + startX) + 'px';
+            window.style.left = (startLeft + e.clientX - startX) + 'px';
+          } else if (handleType === 'n') {
+            window.style.height = (startHeight - e.clientY + startY) + 'px';
+            window.style.top = (startTop + e.clientY - startY) + 'px';
+          } 
+          // Diagonal directions
+          else if (handleType === 'ne') {
+            window.style.width = (startWidth + e.clientX - startX) + 'px';
+            window.style.height = (startHeight - e.clientY + startY) + 'px';
+            window.style.top = (startTop + e.clientY - startY) + 'px';
+          } else if (handleType === 'nw') {
+            window.style.width = (startWidth - e.clientX + startX) + 'px';
+            window.style.height = (startHeight - e.clientY + startY) + 'px';
+            window.style.top = (startTop + e.clientY - startY) + 'px';
+            window.style.left = (startLeft + e.clientX - startX) + 'px';
+          } else if (handleType === 'se') {
+            window.style.width = (startWidth + e.clientX - startX) + 'px';
+            window.style.height = (startHeight + e.clientY - startY) + 'px';
+          } else if (handleType === 'sw') {
+            window.style.width = (startWidth - e.clientX + startX) + 'px';
+            window.style.left = (startLeft + e.clientX - startX) + 'px';
+            window.style.height = (startHeight + e.clientY - startY) + 'px';
+          }
+        }
+        
+        function stopDrag() {
+          document.documentElement.removeEventListener('mousemove', doDrag, false);
+          document.documentElement.removeEventListener('mouseup', stopDrag, false);
+        }
+        
+        document.documentElement.addEventListener('mousemove', doDrag, false);
+        document.documentElement.addEventListener('mouseup', stopDrag, false);
+      });
+    });
+  });
+}
+
+function setupDesktopSelection() {
+    const desktop = document.getElementById('desktop');
+    let selectionBox = null;
+    let startX = 0;
+    let startY = 0;
+    let isSelecting = false;
+
+    // Handle mouse down on desktop
+    desktop.addEventListener('mousedown', function(e) {
+        // Only proceed if clicking directly on the desktop (not on windows or icons)
+        if (e.target !== desktop && !desktop.contains(e.target)) return;
+        if (e.target.closest('.window') || e.target.closest('.icon') || e.target.closest('#taskbar') || e.target.closest('#start-menu')) return;
+        
+        // Create selection box
+        selectionBox = document.createElement('div');
+        selectionBox.className = 'selection-box';
+        selectionBox.style.position = 'absolute';
+        selectionBox.style.border = '1px dotted #0078d7';
+        selectionBox.style.backgroundColor = 'rgba(0, 120, 215, 0.2)';
+        selectionBox.style.pointerEvents = 'none'; // Let mouse events pass through
+        selectionBox.style.zIndex = '50';
+        desktop.appendChild(selectionBox);
+        
+        // Record starting position
+        startX = e.clientX;
+        startY = e.clientY;
+        
+        // Set initial position and size
+        selectionBox.style.left = startX + 'px';
+        selectionBox.style.top = startY + 'px';
+        selectionBox.style.width = '0px';
+        selectionBox.style.height = '0px';
+        
+        isSelecting = true;
+    });
+    
+    // Handle mouse move while selecting
+    document.addEventListener('mousemove', function(e) {
+        if (!isSelecting || !selectionBox) return;
+        
+        // Calculate new dimensions
+        const currentX = e.clientX;
+        const currentY = e.clientY;
+        
+        const width = Math.abs(currentX - startX);
+        const height = Math.abs(currentY - startY);
+        
+        // Set new position (handle selection in any direction)
+        if (currentX < startX) {
+            selectionBox.style.left = currentX + 'px';
+        } else {
+            selectionBox.style.left = startX + 'px';
+        }
+        
+        if (currentY < startY) {
+            selectionBox.style.top = currentY + 'px';
+        } else {
+            selectionBox.style.top = startY + 'px';
+        }
+        
+        selectionBox.style.width = width + 'px';
+        selectionBox.style.height = height + 'px';
+        
+        // Optional: Check for icons within the selection box
+        checkIconSelection(selectionBox);
+    });
+    
+    // Handle mouse up to end selection
+    document.addEventListener('mouseup', function() {
+        if (isSelecting) {
+            // Clean up
+            if (selectionBox && selectionBox.parentElement) {
+                selectionBox.parentElement.removeChild(selectionBox);
+            }
+            isSelecting = false;
+            selectionBox = null;
+        }
+    });
+}
+
+// Helper function to highlight icons that are within the selection box
+function checkIconSelection(selectionBox) {
+    const icons = document.querySelectorAll('.icon');
+    const selectionRect = selectionBox.getBoundingClientRect();
+    
+    icons.forEach(icon => {
+        const iconRect = icon.getBoundingClientRect();
+        
+        // Check if icon is within selection box (even partially)
+        const overlap = !(
+            selectionRect.right < iconRect.left || 
+            selectionRect.left > iconRect.right || 
+            selectionRect.bottom < iconRect.top || 
+            selectionRect.top > iconRect.bottom
+        );
+        
+        // Apply selected styling
+        if (overlap) {
+            icon.classList.add('selected');
+        } else {
+            icon.classList.remove('selected');
+        }
+    });
+}
+
+// Add a style for selected icons
+function addIconSelectionStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .icon.selected .icon-image,
+        .icon.selected .icon-text {
+            background-color: rgba(0, 120, 215, 0.3);
+            border: 1px dotted #0078d7;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+function initializeMobileSupport() {
+  // Detect if we're on a mobile device
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  if (isMobile) {
+    setupTouchControls();
+    adjustForMobile();
+  }
+}
+
+function adjustForMobile() {
+  // Set all windows to be maximized by default on mobile
+  document.querySelectorAll('.window').forEach(window => {
+    const id = window.id.replace('-window', '');
+    isMaximized[id] = true;
+  });
+  
+  // Simplify the UI by showing only one window at a time
+  document.addEventListener('windowOpened', function(e) {
+    const openedId = e.detail.id;
+    
+    // Hide all other windows
+    activeWindows.forEach(win => {
+      const winId = win.id.split('-')[0];
+      if (winId !== openedId) {
+        win.style.display = 'none';
+      }
+    });
+  });
+  
+  // Ensure proper scaling of content
+  document.querySelector('meta[name="viewport"]').setAttribute(
+    'content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+  );
+}
+
+function setupTouchControls() {
+  // Convert double-tap to maximizing windows
+  document.querySelectorAll('.titlebar').forEach(titlebar => {
+    let lastTap = 0;
+    titlebar.addEventListener('touchend', function(e) {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+      
+      if (tapLength < 500 && tapLength > 0) {
+        // Double tap detected
+        const windowId = this.parentElement.id.split('-')[0];
+        maximizeWindow(windowId);
+        e.preventDefault();
+      }
+      
+      lastTap = currentTime;
+    });
+  });
+  
+  // Setup touch events for dragging windows
+  document.querySelectorAll('.window').forEach(window => {
+    const titlebar = window.querySelector('.titlebar');
+    let touchStartX, touchStartY;
+    let windowStartX, windowStartY;
+    
+    titlebar.addEventListener('touchstart', function(e) {
+      const id = window.id.replace('-window', '');
+      
+      // Only allow dragging if not maximized
+      if (!isMaximized[id]) {
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        windowStartX = window.offsetLeft;
+        windowStartY = window.offsetTop;
+        
+        makeWindowActive(id);
+      }
+    });
+    
+    titlebar.addEventListener('touchmove', function(e) {
+      const id = window.id.replace('-window', '');
+      
+      if (!isMaximized[id] && touchStartX !== undefined) {
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+        
+        // Move the window
+        window.style.left = (windowStartX + deltaX) + 'px';
+        window.style.top = (windowStartY + deltaY) + 'px';
+        
+        e.preventDefault(); // Prevent scrolling while dragging
+      }
+    });
+    
+    titlebar.addEventListener('touchend', function() {
+      touchStartX = undefined;
+      touchStartY = undefined;
+    });
+  });
+  
+  // Make icons work with touch
+  document.querySelectorAll('.icon').forEach(icon => {
+    let touchTimeout;
+    
+    icon.addEventListener('touchstart', function() {
+      const that = this;
+      touchTimeout = setTimeout(function() {
+        that.classList.add('selected');
+      }, 500); // Long press to select
+    });
+    
+    icon.addEventListener('touchend', function(e) {
+      clearTimeout(touchTimeout);
+      
+      // If it wasn't a long press, treat as click
+      if (!this.classList.contains('selected')) {
+        const action = this.getAttribute('onclick');
+        if (action) {
+          eval(action);
+        }
+      }
+      
+      // Clear selection after a brief delay
+      setTimeout(() => {
+        this.classList.remove('selected');
+      }, 300);
+      
+      e.preventDefault();
+    });
+  });
+  
+  // Adjust the start menu for touch
+  const startButton = document.getElementById('start-button');
+  startButton.addEventListener('touchend', function(e) {
+    toggleStartMenu();
+    e.preventDefault();
+  });
+}
+
+// Add event dispatch functionality
+function openWindow(id) {
+  const windowElement = document.getElementById(`${id}-window`);
+  
+  // Close start menu if open
+  if (document.getElementById('start-menu').style.display === 'block') {
+    toggleStartMenu();
+  }
+  
+  windowElement.style.display = 'block';
+  
+  // Use a nicer cascading effect for Windows 7
+  if (!isMaximized[id]) {
+    const openCount = activeWindows.filter(w => w.style.display === 'block').length;
+    windowElement.style.top = `${50 + openCount * 25}px`;
+    windowElement.style.left = `${70 + openCount * 25}px`;
+    
+    // Set default width/height for a more Windows 7 look if not already set
+    if (!windowElement.style.width) {
+      windowElement.style.width = '600px';
+    }
+    if (!windowElement.style.height) {
+      windowElement.style.height = '400px';
+    }
+  }
+  
+  makeWindowActive(id);
+  
+  if (!activeWindows.includes(windowElement)) {
+    activeWindows.push(windowElement);
+    updateTaskbar();
+  }
+  
+  // Dispatch event for mobile handling
+  const event = new CustomEvent('windowOpened', { 
+    detail: { id: id }
+  });
+  document.dispatchEvent(event);
+}
+
+// Initialize everything on window load
+window.onload = function() {
+    openWindow('about');
+    initializeMobileSupport();
+    initWindows();
+    setupDraggableWindows();
+    setupMaximizeOnDoubleClick();
+    setupWindowActivation();
+    setupAeroSnap();
+    setupResizableWindows();
+    setupDesktopSelection(); // Add this line
+    addIconSelectionStyles();
+    
+    // Open a default window
+    
+};
+    </script>
+</body>
+</html>
