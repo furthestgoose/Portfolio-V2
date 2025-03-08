@@ -1005,96 +1005,106 @@ function adjustForMobile() {
 }
 
 function setupTouchControls() {
-  document.querySelectorAll('.titlebar').forEach(titlebar => {
-    let lastTap = 0;
-    titlebar.addEventListener('touchend', function(e) {
-      const currentTime = new Date().getTime();
-      const tapLength = currentTime - lastTap;
-      
-      if (tapLength < 500 && tapLength > 0) {
-        // Double tap detected
-        const windowId = this.parentElement.id.split('-')[0];
-        maximizeWindow(windowId);
+    document.querySelectorAll('.titlebar').forEach(titlebar => {
+        let lastTap = 0;
+        let tapTimeout;
+        
+        titlebar.addEventListener('touchend', function(e) {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            
+            clearTimeout(tapTimeout);
+            
+            if (tapLength < 500 && tapLength > 0) {
+                // Double tap detected
+                const windowId = this.parentElement.id.split('-')[0];
+                maximizeWindow(windowId);
+                e.preventDefault();
+            } else {
+                // Single tap detected
+                tapTimeout = setTimeout(() => {
+                    const windowId = this.parentElement.id.split('-')[0];
+                    makeWindowActive(windowId);
+                }, 500);
+            }
+            
+            lastTap = currentTime;
+        });
+    });
+    
+    document.querySelectorAll('.window').forEach(window => {
+        const titlebar = window.querySelector('.titlebar');
+        let touchStartX, touchStartY;
+        let windowStartX, windowStartY;
+        
+        titlebar.addEventListener('touchstart', function(e) {
+            const id = window.id.replace('-window', '');
+            
+            if (!isMaximized[id]) {
+                const touch = e.touches[0];
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+                windowStartX = window.offsetLeft;
+                windowStartY = window.offsetTop;
+                
+                makeWindowActive(id);
+            }
+        });
+        
+        titlebar.addEventListener('touchmove', function(e) {
+            const id = window.id.replace('-window', '');
+            
+            if (!isMaximized[id] && touchStartX !== undefined) {
+                const touch = e.touches[0];
+                const deltaX = touch.clientX - touchStartX;
+                const deltaY = touch.clientY - touchStartY;
+                
+                window.style.left = (windowStartX + deltaX) + 'px';
+                window.style.top = (windowStartY + deltaY) + 'px';
+                
+                e.preventDefault(); 
+            }
+        });
+        
+        titlebar.addEventListener('touchend', function() {
+            touchStartX = undefined;
+            touchStartY = undefined;
+        });
+    });
+    
+    document.querySelectorAll('.icon').forEach(icon => {
+        let touchTimeout;
+        
+        icon.addEventListener('touchstart', function() {
+            const that = this;
+            touchTimeout = setTimeout(function() {
+                that.classList.add('selected');
+            }, 500);
+        });
+        
+        icon.addEventListener('touchend', function(e) {
+            clearTimeout(touchTimeout);
+            
+            if (!this.classList.contains('selected')) {
+                const action = this.getAttribute('onclick');
+                if (action) {
+                    eval(action);
+                }
+            }
+            
+            setTimeout(() => {
+                this.classList.remove('selected');
+            }, 300);
+            
+            e.preventDefault();
+        });
+    });
+    
+    const startButton = document.getElementById('start-button');
+    startButton.addEventListener('touchend', function(e) {
+        toggleStartMenu();
         e.preventDefault();
-      }
-      
-      lastTap = currentTime;
     });
-  });
-  
-  document.querySelectorAll('.window').forEach(window => {
-    const titlebar = window.querySelector('.titlebar');
-    let touchStartX, touchStartY;
-    let windowStartX, windowStartY;
-    
-    titlebar.addEventListener('touchstart', function(e) {
-      const id = window.id.replace('-window', '');
-      
-      if (!isMaximized[id]) {
-        const touch = e.touches[0];
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-        windowStartX = window.offsetLeft;
-        windowStartY = window.offsetTop;
-        
-        makeWindowActive(id);
-      }
-    });
-    
-    titlebar.addEventListener('touchmove', function(e) {
-      const id = window.id.replace('-window', '');
-      
-      if (!isMaximized[id] && touchStartX !== undefined) {
-        const touch = e.touches[0];
-        const deltaX = touch.clientX - touchStartX;
-        const deltaY = touch.clientY - touchStartY;
-        
-        window.style.left = (windowStartX + deltaX) + 'px';
-        window.style.top = (windowStartY + deltaY) + 'px';
-        
-        e.preventDefault(); 
-      }
-    });
-    
-    titlebar.addEventListener('touchend', function() {
-      touchStartX = undefined;
-      touchStartY = undefined;
-    });
-  });
-  
-  document.querySelectorAll('.icon').forEach(icon => {
-    let touchTimeout;
-    
-    icon.addEventListener('touchstart', function() {
-      const that = this;
-      touchTimeout = setTimeout(function() {
-        that.classList.add('selected');
-      }, 500);
-    });
-    
-    icon.addEventListener('touchend', function(e) {
-      clearTimeout(touchTimeout);
-      
-      if (!this.classList.contains('selected')) {
-        const action = this.getAttribute('onclick');
-        if (action) {
-          eval(action);
-        }
-      }
-      
-      setTimeout(() => {
-        this.classList.remove('selected');
-      }, 300);
-      
-      e.preventDefault();
-    });
-  });
-  
-  const startButton = document.getElementById('start-button');
-  startButton.addEventListener('touchend', function(e) {
-    toggleStartMenu();
-    e.preventDefault();
-  });
 }
 
 function openWindow(id) {
