@@ -323,9 +323,9 @@
             <div class="resize-handle resize-handle-sw"></div>
         </div>
         
-        <div id="resume-window" class="window" data-title="Resume.doc">
+        <div id="resume-window" class="window" data-title="CV.docx">
             <div class="titlebar">
-            <div class="title">Resume.doc</div>
+            <div class="title">CV.docx</div>
             <div class="window-controls">
                 <div class="control-button minimize" onclick="minimizeWindow('resume')">_</div>
                 <div class="control-button maximize" onclick="maximizeWindow('resume')">□</div>
@@ -333,10 +333,59 @@
             </div>
             </div>
             <div class="window-content resume-content">
-            <h2>Resume</h2>
-            <div id="resume-content">
-            </div>
-            <button onclick="downloadResume()">Download Resume</button>
+            <h2>CV</h2>
+            <button onclick="downloadResume()">Download CV</button>
+            <h3>Personal Profile</h3>
+            <p>Dedicated Software Engineering undergraduate with a strong foundation in various programming languages and technologies. Experienced in developing responsive web applications, iOS games and mobile apps for the iOS platform. Passionate about creating intuitive user interfaces and solving complex problems through innovative software solutions.</p>
+            <h3>Education</h2>
+                <div class="date">
+                    2023 - 2027 
+                </div>
+                <strong>University Of Leicester</strong>
+                <p>Software Engineering BSc (Predicted 1:1)</p>
+                <p>Relevant modules include: Programming Fundamentals; Mathematics Fundamentals; Introduction to Object Oriented Programming; Algorithms, Data Structures and Advanced Programming; Business and Financial Computing; Requirements Engineering and Professional Practice.</p>
+                <br>
+                <div class="date">
+                    2021 - 2023 
+                </div>
+                <strong>Colchester Institute</strong>
+                <p>Computer Science</p>
+                <p>BTEC Extended Diploma Level 3 (Final Grade D*D*D)</p>
+            <h3>Work Experience</h3>
+                <div class="date">
+                    August 2022 – September 2023   
+                </div>
+                <strong>JD Sports Fashion plc, Sales Assistant</strong>
+                <li>
+                    <ul>Communicated efficiently with customers ensuring that they were able to locate all items they were looking for.</ul>
+                    <ul>Managed customer queries during peak times contributing to an average daily profit of £10,000+ for the store.</ul>
+                    <ul>Managed customer complaints and queries over the phone providing answers and redirected them to appropriate contacts boosting customer satisfaction.</ul>
+                </li>
+                <br>
+                <div class="date">
+                    July 2021 – August 2022   
+                </div>
+                <strong>Pavilion Fun Park,Ride Attendant</strong>
+                <li>
+                    <ul>Managed customer queue during peak hours by effectively communicating with customers reducing waiting times by 20% improving overall business efficiency.</ul>
+                    <ul>Delivered requested service to customers ensuring customer satisfaction.</ul>
+                    <ul>Collaborated with colleagues to close tasks, ensuring business preparedness for the following day.</ul>
+                </li>
+            <h3>Key Skills</h3>
+                <strong>Planning and Organisation</strong>
+                <p>Finished college assignments in advance of the deadline whilst working part-time, showcasing ability to multi-task and prioritise tasks. Tools utilised include a database to track deadlines and work completed on each assignment and a calendar to set aside time for both part time work and college work.</p>
+                <strong>Team Collaboration</strong>
+                <p>Effectively collaborated colleagues during part time work to co-ordinate breaks, closing tasks and manage customer flows, ensuring day to day business operation flowed smoothly.</p>
+                <strong>Communication</strong>
+                <p>Skills developed primarily through part-time work, involving direct customer communication to ensure fulfilment of their needs. This information was then relayed to colleagues to maintain smooth business operations.</p>
+            <h3>Technical Skills</h3>
+                <li>
+                    <ul><strong>Programming Languages</strong>: HTML5, CSS3, JavaScript, TypeScript Swift, Python, Java.</ul>
+                    <ul><strong>Frameworks & Libraries</strong>: React, Next.js, Spring MVC,SwiftUI, React, Tailwind CSS.</ul>
+                    <ul><strong>Tools & Technologies</strong>: Git, Firebase, SwiftData, API Integration, Figma, MySQL, SQLite, Microsoft Office Suite.</ul>
+                </li>
+                
+            
             </div>
             <div class="resize-handle resize-handle-w"></div>
             <div class="resize-handle resize-handle-e"></div>
@@ -425,33 +474,8 @@
     <script src="
 https://cdn.jsdelivr.net/npm/pizzip@3.1.8/dist/pizzip.min.js
 "></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.21.0/docxtemplater.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
 <script>
-    async function loadResume() {
-        try {
-            const response = await fetch('./assets/cv/CV.docx');
-            if (!response.ok) {
-                throw new Error('Failed to load resume');
-            }
-
-            const arrayBuffer = await response.arrayBuffer();
-
-            const zip = new PizZip(arrayBuffer);
-            const doc = new window.docxtemplater(zip);
-
-            const text = doc.getFullText();
-            const formattedText = text.split('\n').map(line => `<p>${line}</p>`).join('');
-
-            document.getElementById('resume-content').innerHTML = formattedText;
-        } catch (error) {
-            console.error('Error loading resume:', error);
-            document.getElementById('resume-content').innerHTML = '<p>Error loading resume.</p>';
-        }
-    }
-
     function downloadResume() {
         const link = document.createElement('a');
         link.href = 'assets/cv/CV.docx';
@@ -461,11 +485,7 @@ https://cdn.jsdelivr.net/npm/pizzip@3.1.8/dist/pizzip.min.js
         document.body.removeChild(link);
     }
 
-    document.addEventListener('windowOpened', function(e) {
-        if (e.detail.id === 'resume') {
-            loadResume();
-        }
-    });
+
 </script>
     <script>
 let activeWindows = [];
@@ -563,22 +583,34 @@ function minimizeWindow(id) {
     }, 200);
 }
 
+function restoreWindow(windowElement, e) {
+    const mouseX = e ? e.clientX : windowElement.offsetLeft + windowElement.offsetWidth / 2;
+    const screenWidth = document.documentElement.clientWidth;
+    const newWidth = parseInt(windowElement.dataset.prevWidth) || 600;
+    
+    const newLeft = Math.max(0, Math.min(mouseX - (newWidth / 2), screenWidth - newWidth));
+
+    windowElement.style.width = windowElement.dataset.prevWidth;
+    windowElement.style.height = windowElement.dataset.prevHeight;
+    windowElement.style.top = windowElement.dataset.prevTop;
+    windowElement.style.left = windowElement.dataset.prevLeft;
+    windowElement.style.borderRadius = '5px';
+    windowElement.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
+    
+    const id = windowElement.id.replace('-window', '');
+    isMaximized[id] = false;
+    updateTaskbar();
+}
+
 function maximizeWindow(id) {
     const windowElement = document.getElementById(`${id}-window`);
-    
     if (isMaximized[id]) {
-        windowElement.style.top = windowElement.dataset.prevTop;
-        windowElement.style.left = windowElement.dataset.prevLeft;
-        windowElement.style.width = windowElement.dataset.prevWidth;
-        windowElement.style.height = windowElement.dataset.prevHeight;
-        windowElement.style.borderRadius = '5px';
-        windowElement.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
-        isMaximized[id] = false;
+        restoreWindow(windowElement); // Call restoreWindow without event
     } else {
-        windowElement.dataset.prevTop = windowElement.style.top;
-        windowElement.dataset.prevLeft = windowElement.style.left;
-        windowElement.dataset.prevWidth = windowElement.style.width || '600px';
-        windowElement.dataset.prevHeight = windowElement.style.height || '400px';
+        windowElement.dataset.prevTop = windowElement.style.top || windowElement.offsetTop + 'px';
+        windowElement.dataset.prevLeft = windowElement.style.left || windowElement.offsetLeft + 'px';
+        windowElement.dataset.prevWidth = windowElement.style.width || windowElement.offsetWidth + 'px';
+        windowElement.dataset.prevHeight = windowElement.style.height || windowElement.offsetHeight + 'px';
         
         windowElement.style.top = '0';
         windowElement.style.left = '0';
@@ -588,7 +620,6 @@ function maximizeWindow(id) {
         windowElement.querySelector('.titlebar').style.borderRadius = '0';
         isMaximized[id] = true;
     }
-    
     makeWindowActive(id);
     updateTaskbar();
 }
@@ -1103,7 +1134,6 @@ function openWindow(id) {
 }
 
 window.onload = function() {
-    openWindow('about');
     initializeMobileSupport();
     initWindows();
     setupDraggableWindows();
