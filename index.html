@@ -548,35 +548,22 @@ function openWindow(id) {
 
 function closeWindow(id) {
     const windowElement = document.getElementById(`${id}-window`);
-
-    // Prevent multiple taps issue by ensuring a single event triggers the action
-    function handleClose() {
-        windowElement.style.transition = 'opacity 0.2s';
-        windowElement.style.opacity = '0';
-
-        setTimeout(() => {
-            windowElement.style.display = 'none';
-            windowElement.style.opacity = '1';
-            windowElement.style.transition = '';
-
-            const index = activeWindows.indexOf(windowElement);
-            if (index > -1) {
-                activeWindows.splice(index, 1);
-                updateTaskbar();
-            }
-        }, 200);
-    }
-
-    // Remove any existing event listeners to prevent multiple bindings
-    const closeButton = windowElement.querySelector('.close-button');
-    closeButton.removeEventListener('click', handleClose);
-    closeButton.removeEventListener('touchend', handleClose);
-
-    // Add event listeners with `passive: true` for better touch performance
-    closeButton.addEventListener('click', handleClose, { passive: true });
-    closeButton.addEventListener('touchend', handleClose, { passive: true });
+    
+    windowElement.style.transition = 'opacity 0.2s';
+    windowElement.style.opacity = '0';
+    
+    setTimeout(() => {
+        windowElement.style.display = 'none';
+        windowElement.style.opacity = '1';
+        windowElement.style.transition = '';
+        
+        const index = activeWindows.indexOf(windowElement);
+        if (index > -1) {
+            activeWindows.splice(index, 1);
+            updateTaskbar();
+        }
+    }, 200);
 }
-
 function minimizeWindow(id) {
     const windowElement = document.getElementById(`${id}-window`);
     
