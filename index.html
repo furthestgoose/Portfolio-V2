@@ -491,16 +491,19 @@ https://cdn.jsdelivr.net/npm/pizzip@3.1.8/dist/pizzip.min.js
 let activeWindows = [];
 let zIndex = 100;
 let isMaximized = {};
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
+        }
 
-function updateTime() {
-    const now = new Date();
-    let hours = now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // Convert 0 to 12
-    document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
-}
+        document.addEventListener("DOMContentLoaded", () => {
+            updateTime();
+            setInterval(updateTime, 1000);
+        });
 
 function initWindows() {
     const windows = document.querySelectorAll('.window');
@@ -512,8 +515,6 @@ function initWindows() {
         window.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
     });
     
-    updateTime();
-    setInterval(updateTime, 60000);
 }
 
 function openWindow(id) {
