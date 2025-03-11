@@ -460,7 +460,7 @@
                 <img src="https://img.icons8.com/skeuomorphism/32/binders-folder.png" alt="Projects"> Projects
             </div>
             <div class="start-item" onclick="openWindow('resume'); toggleStartMenu();">
-                <img src="https://img.icons8.com/skeuomorphism/32/contract.png" alt="Resume"> Cv
+                <img src="https://img.icons8.com/skeuomorphism/32/contract.png" alt="Resume"> CV
             </div>
             <div class="start-item" onclick="openWindow('contact'); toggleStartMenu();">
                 <img src="https://img.icons8.com/skeuomorphism/32/open-envelope.png" alt="Contact"> Contact Me
@@ -635,7 +635,7 @@ function maximizeWindow(id) {
             setMaximizedStyle(windowElement);
             isProjectsMaximized = true;
         }
-    } else if (id === 'cv') {
+    } else if (id === 'resume') {
         if (isCvMaximized) {
             restoreWindow(windowElement);
         } else {
