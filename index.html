@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adam's Portfolio!</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 </head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YM3XQ9NKGR"></script>
 <script>
@@ -493,14 +492,18 @@ let isCvMaximized = false;
 let isContactMaximized = false;
 
 function updateTime() {
-    const now = new Date();
-    let hours = now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // Convert 0 to 12
-    document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
-}
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateTime();
+            setInterval(updateTime, 1000);
+        });
 
 function initWindows() {
     const windows = document.querySelectorAll('.window');
@@ -512,8 +515,6 @@ function initWindows() {
         window.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
     });
     
-    updateTime();
-    setInterval(updateTime, 60000);
 }
 
 function openWindow(id) {
