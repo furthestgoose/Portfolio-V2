@@ -470,6 +470,9 @@
             </div>
         </div>
     </div>
+    <script src="
+https://cdn.jsdelivr.net/npm/pizzip@3.1.8/dist/pizzip.min.js
+"></script>
 
 <script>
     function downloadResume() {
@@ -486,12 +489,9 @@
     <script>
 let activeWindows = [];
 let zIndex = 100;
-let isAboutMaximized = false;
-let isProjectsMaximized = false;
-let isCvMaximized = false;
-let isContactMaximized = false;
-
-function updateTime() {
+let isMaximized = {};
+let isRestoring = false;
+        function updateTime() {
             const now = new Date();
             let hours = now.getHours();
             const minutes = now.getMinutes().toString().padStart(2, '0');
@@ -577,102 +577,12 @@ function minimizeWindow(id) {
         windowElement.style.transform = 'scale(1)';
         windowElement.style.opacity = '1';
         windowElement.style.transition = '';
-        windowElement.dataset.minimized = 'true'; 
         
         if (!activeWindows.includes(windowElement)) {
             activeWindows.push(windowElement);
         }
-        
-        updateTaskbar();
     }, 200);
 }
-
-function restoreWindow(windowElement, e) {
-    const mouseX = e ? e.clientX : windowElement.offsetLeft + windowElement.offsetWidth / 2;
-    const screenWidth = document.documentElement.clientWidth;
-    const newWidth = parseInt(windowElement.dataset.prevWidth) || 600;
-    
-    const newLeft = Math.max(0, Math.min(mouseX - (newWidth / 2), screenWidth - newWidth));
-
-    windowElement.style.width = windowElement.dataset.prevWidth;
-    windowElement.style.height = windowElement.dataset.prevHeight;
-    windowElement.style.top = windowElement.dataset.prevTop;
-    windowElement.style.left = windowElement.dataset.prevLeft;
-    windowElement.style.borderRadius = '5px';
-    windowElement.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
-    
-    // Update the appropriate state variable
-    const id = windowElement.id.replace('-window', '');
-    if (id === 'about') {
-        isAboutMaximized = false;
-    } else if (id === 'projects') {
-        isProjectsMaximized = false;
-    } else if (id === 'cv') {
-        isCvMaximized = false;
-    } else if (id === 'contact') {
-        isContactMaximized = false;
-    }
-    
-    updateTaskbar();
-}
-
-function maximizeWindow(id) {
-    const windowElement = document.getElementById(`${id}-window`);
-    
-    if (id === 'about') {
-        if (isAboutMaximized) {
-            restoreWindow(windowElement);
-        } else {
-            saveWindowDimensions(windowElement);
-            setMaximizedStyle(windowElement);
-            isAboutMaximized = true;
-        }
-    } else if (id === 'projects') {
-        if (isProjectsMaximized) {
-            restoreWindow(windowElement);
-        } else {
-            saveWindowDimensions(windowElement);
-            setMaximizedStyle(windowElement);
-            isProjectsMaximized = true;
-        }
-    } else if (id === 'resume') {
-        if (isCvMaximized) {
-            restoreWindow(windowElement);
-        } else {
-            saveWindowDimensions(windowElement);
-            setMaximizedStyle(windowElement);
-            isCvMaximized = true;
-        }
-    } else if (id === 'contact') {
-        if (isContactMaximized) {
-            restoreWindow(windowElement);
-        } else {
-            saveWindowDimensions(windowElement);
-            setMaximizedStyle(windowElement);
-            isContactMaximized = true;
-        }
-    }
-    
-    makeWindowActive(id);
-    updateTaskbar();
-}
-
-function saveWindowDimensions(windowElement) {
-    windowElement.dataset.prevTop = windowElement.style.top || windowElement.offsetTop + 'px';
-    windowElement.dataset.prevLeft = windowElement.style.left || windowElement.offsetLeft + 'px';
-    windowElement.dataset.prevWidth = windowElement.style.width || windowElement.offsetWidth + 'px';
-    windowElement.dataset.prevHeight = windowElement.style.height || windowElement.offsetHeight + 'px';
-}
-
-function setMaximizedStyle(windowElement) {
-    windowElement.style.top = '0';
-    windowElement.style.left = '0';
-    windowElement.style.width = '100%';
-    windowElement.style.height = 'calc(100% - 40px)';
-    windowElement.style.borderRadius = '0';
-    windowElement.querySelector('.titlebar').style.borderRadius = '0';
-}
-
 
 
 function makeWindowActive(id) {
@@ -692,30 +602,31 @@ function updateTaskbar() {
     taskbarContainer.innerHTML = '';
     
     activeWindows.forEach(win => {
-        const winId = win.id.split('-')[0];
-        const title = win.dataset.title || win.querySelector('.title').textContent;
-        
-        const taskButton = document.createElement('div');
-        taskButton.className = 'taskbar-item';
-        if (win.classList.contains('active') && win.dataset.minimized !== 'true') {
-            taskButton.classList.add('active');
-        }
-        taskButton.dataset.id = winId;
-        taskButton.textContent = title;
-        
-        taskButton.onclick = function() {
-            if (win.dataset.minimized === 'true' || win.style.display === 'none') {
-                win.style.display = 'block';
-                win.dataset.minimized = 'false';
-                makeWindowActive(winId);
-            } else if (win.classList.contains('active')) {
-                minimizeWindow(winId);
-            } else {
-                makeWindowActive(winId);
+        if (win.style.display !== 'none') {
+            const winId = win.id.split('-')[0];
+            const title = win.dataset.title || win.querySelector('.title').textContent;
+            
+            const taskButton = document.createElement('div');
+            taskButton.className = 'taskbar-item';
+            if (win.classList.contains('active')) {
+                taskButton.classList.add('active');
             }
-        };
-        
-        taskbarContainer.appendChild(taskButton);
+            taskButton.dataset.id = winId;
+            taskButton.textContent = title;
+            
+            taskButton.onclick = function() {
+                if (win.style.display === 'none') {
+                    win.style.display = 'block';
+                    makeWindowActive(winId);
+                } else if (win.classList.contains('active')) {
+                    minimizeWindow(winId);
+                } else {
+                    makeWindowActive(winId);
+                }
+            };
+            
+            taskbarContainer.appendChild(taskButton);
+        }
     });
 }
 
@@ -746,6 +657,7 @@ document.addEventListener('click', function(event) {
         startMenu.style.display = 'none';
     }
 });
+
 function setupDraggableWindows() {
     document.querySelectorAll('.window').forEach(window => {
         const titlebar = window.querySelector('.titlebar');
@@ -759,45 +671,8 @@ function setupDraggableWindows() {
             
             const id = window.id.replace('-window', '');
             
-            let isCurrentWindowMaximized = false;
-            if (id === 'about') {
-                isCurrentWindowMaximized = isAboutMaximized;
-            } else if (id === 'projects') {
-                isCurrentWindowMaximized = isProjectsMaximized;
-            } else if (id === 'cv') {
-                isCurrentWindowMaximized = isCvMaximized;
-            } else if (id === 'contact') {
-                isCurrentWindowMaximized = isContactMaximized;
-            }
-            
-            if (isCurrentWindowMaximized) {
-                const mouseX = e.clientX;
-                const screenWidth = document.documentElement.clientWidth;
-                const newWidth = parseInt(window.dataset.prevWidth) || 600;
-                
-                const newLeft = Math.max(0, Math.min(mouseX - (newWidth / 2), screenWidth - newWidth));
-
-                window.style.width = window.dataset.prevWidth;
-                window.style.height = window.dataset.prevHeight;
-                window.style.top = '0px';
-                window.style.left = newLeft + 'px';
-                window.style.borderRadius = '5px';
-                window.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
-                
-                if (id === 'about') {
-                    isAboutMaximized = false;
-                } else if (id === 'projects') {
-                    isProjectsMaximized = false;
-                } else if (id === 'cv') {
-                    isCvMaximized = false;
-                } else if (id === 'contact') {
-                    isContactMaximized = false;
-                }
-                
-                updateTaskbar();
-                
-                pos3 = e.clientX;
-                pos4 = e.clientY;
+            if (isMaximized[id]) {
+                return;
             } else {
                 makeWindowActive(id);
                 
@@ -821,6 +696,7 @@ function setupDraggableWindows() {
             const top = (window.offsetTop - pos2);
             const left = (window.offsetLeft - pos1);
             
+
             const maxTop = document.documentElement.clientHeight - 50;
             const maxLeft = document.documentElement.clientWidth - 50;
             
@@ -1105,6 +981,54 @@ function openWindow(id) {
     detail: { id: id }
   });
   document.dispatchEvent(event);
+}
+
+function maximizeWindow(id) {
+    const windowElement = document.getElementById(`${id}-window`);
+
+
+
+    if (isMaximized[id]) {
+        console.log(`Restoring window: ${id}`);
+        isMaximized[id] = false; 
+        restoreWindow(windowElement);
+    } else {
+        console.log(`Maximizing window: ${id}`);
+        isMaximized[id] = true;  
+
+
+        windowElement.dataset.prevTop = windowElement.style.top || windowElement.offsetTop + 'px';
+        windowElement.dataset.prevLeft = windowElement.style.left || windowElement.offsetLeft + 'px';
+        windowElement.dataset.prevWidth = windowElement.style.width || windowElement.offsetWidth + 'px';
+        windowElement.dataset.prevHeight = windowElement.style.height || windowElement.offsetHeight + 'px';
+
+        windowElement.style.top = '0';
+        windowElement.style.left = '0';
+        windowElement.style.width = '100%';
+        windowElement.style.height = 'calc(100% - 40px)';
+        windowElement.style.borderRadius = '0';
+        windowElement.querySelector('.titlebar').style.borderRadius = '0';
+    }
+
+    makeWindowActive(id);
+    updateTaskbar();
+}
+
+
+
+function restoreWindow(windowElement) {
+    const id = windowElement.id.replace('-window', '');
+
+    isMaximized[id] = false;
+
+    windowElement.style.top = windowElement.dataset.prevTop;
+    windowElement.style.left = windowElement.dataset.prevLeft;
+    windowElement.style.width = windowElement.dataset.prevWidth;
+    windowElement.style.height = windowElement.dataset.prevHeight;
+    windowElement.style.borderRadius = '5px';
+    windowElement.querySelector('.titlebar').style.borderRadius = '5px 5px 0 0';
+
+    updateTaskbar();
 }
 
 window.onload = function() {
