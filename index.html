@@ -45,6 +45,13 @@
               </div>
             <div class="icon-text">Contact.exe</div>
         </div>
+
+        <div class="icon" onclick="openWindow('cloud')">
+    <div class="icon-image">
+        <img src="https://img.icons8.com/skeuomorphism/32/cloud.png" alt="Cloud Icon">
+    </div>
+    <div class="icon-text">Cloud Services.exe</div>
+</div>
         
         <!-- Windows -->
         <div id="about-window" class="window" data-title="About Me.exe">
@@ -457,6 +464,60 @@
             <div class="resize-handle resize-handle-se"></div>
             <div class="resize-handle resize-handle-sw"></div>
         </div>
+
+<div id="cloud-window" class="window" data-title="Cloud Services.exe">
+    <div class="titlebar">
+        <div class="title">Cloud Services.exe</div>
+        <div class="window-controls">
+            <div class="control-button minimize" onclick="minimizeWindow('cloud')">_</div>
+            <div class="control-button maximize" onclick="maximizeWindow('cloud')">□</div>
+            <div class="control-button close" onclick="closeWindow('cloud')">✕</div>
+        </div>
+    </div>
+    <div class="window-content cloud-content">
+        <h2>Private Cloud Services</h2>
+        <div class="cloud-apps">
+    <div class="cloud-app" onclick="window.open('https://proxmox.adamb.tech/#v1:0:=lxc%2F102:4::::::=consolejs:', '_blank')">
+        <div class="cloud-app-icon" style="background: #ffe0b2;">
+            <img src="https://img.icons8.com/ios-filled/64/server.png" alt="Proxmox">
+        </div>
+        <div class="cloud-app-label">Proxmox</div>
+    </div>
+
+    <div class="cloud-app" onclick="window.open('https://nextcloud.adamb.tech/index.php/login', '_blank')">
+        <div class="cloud-app-icon" style="background: #b3e5fc;">
+            <img src="https://img.icons8.com/ios-filled/64/nas.png" alt="Nextcloud">
+        </div>
+        <div class="cloud-app-label">Nextcloud</div>
+    </div>
+
+    <div class="cloud-app" onclick="window.open('https://portainer.adamb.tech/#!/auth', '_blank')">
+        <div class="cloud-app-icon" style="background: #c8e6c9;">
+            <img src="https://img.icons8.com/ios-filled/64/docker.png" alt="Portainer">
+        </div>
+        <div class="cloud-app-label">Portainer</div>
+    </div>
+
+    <div class="cloud-app" onclick="window.open('https://git.adamb.tech', '_blank')">
+        <div class="cloud-app-icon" style="background: #f8bbd0;">
+            <img src="https://img.icons8.com/ios-filled/64/git.png" alt="Git Server">
+        </div>
+        <div class="cloud-app-label">Git Server</div>
+    </div>
+</div>
+
+    </div>
+    <div class="resize-handle resize-handle-w"></div>
+    <div class="resize-handle resize-handle-e"></div>
+    <div class="resize-handle resize-handle-s"></div>
+    <div class="resize-handle resize-handle-n"></div>
+    <div class="resize-handle resize-handle-ne"></div>
+    <div class="resize-handle resize-handle-nw"></div>
+    <div class="resize-handle resize-handle-se"></div>
+    <div class="resize-handle resize-handle-sw"></div>
+</div>
+
+
         
         <div id="taskbar">
             <div id="start-button" onclick="toggleStartMenu()">
