@@ -66,7 +66,7 @@
             <div class="window-content about-content">
                 <h2>About Me</h2>
                 <img src="assets/project_images/UOL-link2025-5404.jpg" alt="Adam" style="width: 50%; height: auto; display: block; margin: 15px auto;">
-                <h3 style="text-align: center;">Adam Byford - Student Software Engineer</h3>
+                <h3 id="typing-title" class="typing-text" style="text-align: center;"></h3>
                 <div style="text-align: center;">
                     <p>I'm a 20 year old undergraduate studying software engineering at the University of Leicester currently in my 3rd year.
                         My favourite modules I have completed so far are: UI Design & Evaluation,Software Architecture, and Databases and Domain modelling</p>
@@ -123,6 +123,18 @@
             </div>
             <div class="window-content projects-content">
                 <h2>My Projects</h2>
+                
+                <div id="project-filters">
+                    <span class="filter-label">Filter by:</span>
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="Swift">Swift</button>
+                    <button class="filter-btn" data-filter="React">React</button>
+                    <button class="filter-btn" data-filter="JavaScript">JavaScript</button>
+                    <button class="filter-btn" data-filter="Python">Python</button>
+                    <button class="filter-btn" data-filter="TypeScript">TypeScript</button>
+                    <button class="filter-btn" data-filter="Firebase">Firebase</button>
+                    <button class="filter-btn" data-filter="Unity">Unity</button>
+                </div>
 
                 <div class="project">
                     <div class="date">
@@ -561,6 +573,20 @@
                 <img src="https://img.icons8.com/skeuomorphism/32/circled-play.png" alt="Start"> Start
             </div>
             <div id="open-windows">
+            </div>
+            <div id="system-tray">
+                <div class="tray-icon" data-tooltip="Wi-Fi: Connected">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/wifi.png" alt="WiFi">
+                </div>
+                <div class="tray-icon" data-tooltip="Volume: 75%">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/speaker.png" alt="Volume">
+                </div>
+                <div class="tray-icon" data-tooltip="Battery: 100%">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/full-battery.png" alt="Battery">
+                </div>
+                <div class="tray-icon" data-tooltip="No new notifications">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/appointment-reminders.png" alt="Notifications">
+                </div>
             </div>
             <div id="time">3:45 PM</div>
         </div>
@@ -1144,6 +1170,96 @@ function restoreWindow(windowElement) {
     updateTaskbar();
 }
 
+// Project Filtering
+function setupProjectFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.projects-content .project');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+            
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter projects
+            let visibleCount = 0;
+            projects.forEach(project => {
+                if (filter === 'all') {
+                    project.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    const tags = project.querySelectorAll('.tag');
+                    const hasTag = Array.from(tags).some(tag => 
+                        tag.textContent.toLowerCase().includes(filter.toLowerCase())
+                    );
+                    
+                    if (hasTag) {
+                        project.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        project.classList.add('hidden');
+                    }
+                }
+            });
+            
+            // Show/hide no results message
+            const projectsContainer = document.querySelector('.projects-content');
+            let noResultsMsg = projectsContainer.querySelector('.no-results-message');
+            
+            if (visibleCount === 0) {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.className = 'no-results-message';
+                    noResultsMsg.textContent = 'No projects found with the selected filter.';
+                    projectsContainer.appendChild(noResultsMsg);
+                }
+            } else {
+                if (noResultsMsg) {
+                    noResultsMsg.remove();
+                }
+            }
+        });
+    });
+}
+
+// Typing Effect
+function setupTypingEffect() {
+    const typingElement = document.getElementById('typing-title');
+    const textToType = "Adam Byford - Student Software Engineer";
+    let charIndex = 0;
+    let hasTyped = false;
+    
+    function typeText() {
+        if (charIndex < textToType.length) {
+            typingElement.textContent += textToType.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeText, 60);
+        } else {
+            typingElement.classList.add('typing-done');
+        }
+    }
+    
+    // Start typing when About window is opened
+    const aboutWindow = document.getElementById('about-window');
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'style') {
+                const display = aboutWindow.style.display;
+                if (display === 'block' && !hasTyped) {
+                    hasTyped = true;
+                    typingElement.textContent = '';
+                    charIndex = 0;
+                    setTimeout(typeText, 300);
+                }
+            }
+        });
+    });
+    
+    observer.observe(aboutWindow, { attributes: true });
+}
+
 window.onload = function() {
     initializeMobileSupport();
     initWindows();
@@ -1154,6 +1270,8 @@ window.onload = function() {
     setupResizableWindows();
     setupDesktopSelection(); 
     addIconSelectionStyles();
+    setupProjectFilters();
+    setupTypingEffect();
     
 };
     </script>
